@@ -1,0 +1,2 @@
+{"utc": 1792444375.7927675, "test": "controller-kill", "phase": "pre_kill", "worker_pid": 23156}
+{"utc": 1792444394.2676857, "test": "controller-kill", "phase": "post_kill", "sysfs": {"pwm1_enable": "2", "pwm2_enable": "2"}, "recovery_state": "fault", "fault_error": "Worker exited or heartbeat pipe closed", "supervisor_alive": true, "fans_restored_auto": true}

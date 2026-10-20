@@ -1,0 +1,59 @@
+Nitro Control: License Scope
+============================
+
+This is a multi-license source workspace, not a relicensing of Linux, Arch
+Linux packaging, Qt, PySide6, Python, NVIDIA software, or other dependencies.
+File-level and upstream notices remain in force. See NOTICE.md for provenance.
+
+New Original Project Work
+-------------------------
+
+The new, original Nitro Control userspace application and tests in
+application/, project-original application launchers and service/policy
+definitions, project-original build/verification helpers under scripts/,
+project-original tests under the root tests/ directory, and project-original
+operator documentation are licensed under the GNU General Public License,
+version 3 or (at your option) any later version:
+SPDX-License-Identifier: GPL-3.0-or-later.
+
+This grant covers original project material only. Already upstream-licensed,
+copied, or derived material retains its applicable upstream/file-level terms,
+even when located under scripts/ or tests/; it is not relicensed by this grant.
+
+You may redistribute and/or modify this work under those terms. It is
+distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See LICENSES/GPL-3.0.txt for the complete license.
+
+Copyright remains with the respective contributors. No legal name, employer,
+copyright assignment, upstream sign-off, or hardware test attestation is
+inferred from an account name, machine path, or development assistance.
+
+Kernel-Derived Work
+-------------------
+
+drivers/platform/x86/acer-wmi.c carries GPL-2.0-or-later. Its local derived
+16-line backport, packaging/0001-acer-wmi-anv15-51.patch, retains that license;
+the userspace GPL-3.0-or-later grant does not replace it.
+
+The complete Linux kernel retains its own COPYING, file-level licenses,
+exceptions, and notices. The Arch-derived kernel PKGBUILD retains the package
+license declaration GPL-2.0-only. See LICENSES/GPL-2.0.txt and NOTICE.md.
+
+Arch Packaging And External Dependencies
+---------------------------------------
+
+The vendored Arch recipe/configuration metadata is separately licensed 0BSD
+by vendor/arch-linux-packaging/REUSE.toml. Preserve the Arch Linux Contributors
+notice and the original maintainer attribution. The recipe's package license
+field is not the license of the recipe itself. The full 0BSD terms with the
+preserved Arch attribution are included in LICENSES/0BSD.txt.
+
+Qt/PySide6 are dynamically imported dependencies under their own applicable
+licenses. The separate Python userspace program communicates with Linux
+through standard kernel interfaces; it is not linked into the kernel. This
+workspace grants no new rights in external code, trademarks, or firmware.
+
+Full license texts and their HTTPS provenance are indexed in
+LICENSES/README.md. Retain applicable upstream licenses and provide the
+required corresponding source when distributing covered binaries.

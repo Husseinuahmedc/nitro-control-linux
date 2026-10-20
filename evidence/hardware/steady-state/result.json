@@ -1,0 +1,209 @@
+{
+  "schema": 1,
+  "source_version": "0.1.0",
+  "identity": {
+    "kernel_release": "7.2.9-arch1-1-nitro-test",
+    "dmi": {
+      "sys_vendor": "Acer",
+      "product_name": "Nitro ANV15-51",
+      "board_name": "Sportage_RTH",
+      "bios_version": "V1.60"
+    }
+  },
+  "started_utc": "2026-10-19T21:09:30.033713+00:00",
+  "started_monotonic": 1470.691674575,
+  "evidence_kind": "real-controller",
+  "execution_requested": true,
+  "outcome": "steady-state-sequence-passed",
+  "full_acceptance": false,
+  "hardware_verified_record_written": false,
+  "requires_operator_review": true,
+  "pending_real_tests": [
+    "GUI lease expiry/death",
+    "worker crash/hang",
+    "partial-write/readback failure",
+    "suspend/resume"
+  ],
+  "limits": [
+    "RPM changes are observations, not calibration or causality proof",
+    "Eight seconds bounds new non-Auto command/observation work, not wedged firmware recovery",
+    "Kernel release/DMI do not attest same-release module bytes"
+  ],
+  "plan": [
+    "verified Auto baseline",
+    "both Max, observe each actual RPM",
+    "verified Auto",
+    "CPU Manual 80 / GPU Auto, observe CPU",
+    "verified Auto",
+    "GPU Manual 80 / CPU Auto, observe GPU",
+    "verified Auto + release"
+  ],
+  "stages": [
+    {
+      "stage": "both_max",
+      "requested": {
+        "cpu": {
+          "mode": "max"
+        },
+        "gpu": {
+          "mode": "max"
+        }
+      },
+      "baseline_rpm": {
+        "cpu": 2207,
+        "gpu": 1953
+      },
+      "baseline_monotonic": 1476.963161673,
+      "observed_rpm": {
+        "cpu": 2829,
+        "gpu": 2548
+      },
+      "rpm_change_observed": {
+        "cpu": true,
+        "gpu": true
+      },
+      "elapsed_seconds": 0.7643326079999042
+    },
+    {
+      "stage": "cpu_manual_80",
+      "requested": {
+        "cpu": {
+          "mode": "manual",
+          "percent": 80
+        },
+        "gpu": {
+          "mode": "auto"
+        }
+      },
+      "baseline_rpm": {
+        "cpu": 3776,
+        "gpu": 3511
+      },
+      "baseline_monotonic": 1477.951685385,
+      "observed_rpm": {
+        "cpu": 4739,
+        "gpu": 4427
+      },
+      "rpm_change_observed": {
+        "cpu": true
+      },
+      "elapsed_seconds": 0.28190613499987194
+    },
+    {
+      "stage": "gpu_manual_80",
+      "requested": {
+        "cpu": {
+          "mode": "auto"
+        },
+        "gpu": {
+          "mode": "manual",
+          "percent": 80
+        }
+      },
+      "baseline_rpm": {
+        "cpu": 5350,
+        "gpu": 5002
+      },
+      "baseline_monotonic": 1478.438909347,
+      "observed_rpm": {
+        "cpu": 6006,
+        "gpu": 5811
+      },
+      "rpm_change_observed": {
+        "gpu": true
+      },
+      "elapsed_seconds": 0.3016924270000345
+    }
+  ],
+  "errors": [],
+  "initial_status": {
+    "schema": 1,
+    "backend": {
+      "connected": true,
+      "control_available": true,
+      "control_enabled": true,
+      "hardware_verified": false
+    },
+    "validation_mode_observed": true,
+    "cpu": {
+      "temperature_c": 44.0,
+      "rpm": 2207,
+      "mode": "auto",
+      "pwm": 0,
+      "percent": 0,
+      "requested_mode": "auto",
+      "requested_percent": null,
+      "confirmation": "firmware-confirmed",
+      "rpm_response": "unverified"
+    },
+    "gpu": {
+      "temperature_c": 41,
+      "rpm": 1951,
+      "mode": "auto",
+      "pwm": 0,
+      "percent": 0,
+      "requested_mode": "auto",
+      "requested_percent": null,
+      "confirmation": "firmware-confirmed",
+      "rpm_response": "unverified"
+    },
+    "lease": {
+      "active": false,
+      "owned_by_client": false,
+      "owner_pid": null,
+      "remaining_seconds": 0
+    },
+    "sample_age_seconds": 0.14362265199997637,
+    "fault_present": false
+  },
+  "cleanup": {
+    "auto_attempted": true,
+    "both_auto_confirmed": true,
+    "release_attempted": true,
+    "release_confirmed": true,
+    "ownership_unknown": false,
+    "errors": []
+  },
+  "last_status": {
+    "schema": 1,
+    "backend": {
+      "connected": true,
+      "control_available": true,
+      "control_enabled": true,
+      "hardware_verified": false
+    },
+    "validation_mode_observed": true,
+    "cpu": {
+      "temperature_c": 44.0,
+      "rpm": 6108,
+      "mode": "auto",
+      "pwm": 204,
+      "percent": 80,
+      "requested_mode": "auto",
+      "requested_percent": null,
+      "confirmation": "firmware-confirmed",
+      "rpm_response": "unverified"
+    },
+    "gpu": {
+      "temperature_c": 39,
+      "rpm": 5859,
+      "mode": "auto",
+      "pwm": 204,
+      "percent": 80,
+      "requested_mode": "auto",
+      "requested_percent": null,
+      "confirmation": "firmware-confirmed",
+      "rpm_response": "unverified"
+    },
+    "lease": {
+      "active": false,
+      "owned_by_client": false,
+      "owner_pid": null,
+      "remaining_seconds": 0
+    },
+    "sample_age_seconds": 0.13958391300002404,
+    "fault_present": false
+  },
+  "finished_utc": "2026-10-19T21:09:38.536299+00:00",
+  "finished_monotonic": 1479.19425477
+}

@@ -1,0 +1,26 @@
+# Build outputs, downloads, machine-specific state and caches
+/build/
+/downloads/
+/packages/
+/logs/
+/plan/
+/vendor/
+/graphify-out/
+**/__pycache__/
+*.py[cod]
+*.pem
+*.key
+*.p12
+*.pfx
+*.ko
+*.o
+*.pkg.tar.*
+*.tar.gz
+*.tar.zst
+.backend-runtime/
+.pytest_cache/
+.venv/
+.coverage
+htmlcov/
+core
+core.*
