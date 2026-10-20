@@ -1,0 +1,40 @@
+# Original userspace package; GPL-3.0-or-later, see LICENSE and NOTICE.md.
+pkgname=nitro-control
+pkgver=0.1.0
+pkgrel=9
+pkgdesc='Native Acer Nitro fan controller with independent firmware Auto recovery'
+arch=(any)
+license=(GPL-3.0-or-later)
+depends=(python pyside6 qt6-wayland polkit nvidia-utils)
+options=(!debug !strip !lto)
+source=("nitro-control-$pkgver.tar.gz")
+sha256sums=('@SOURCE_SHA256@')
+
+check() {
+  cd "$srcdir/nitro-control-$pkgver/application"
+  PYTHONDONTWRITEBYTECODE=1 QT_QPA_PLATFORM=offscreen /usr/bin/python -m unittest discover -s tests -v
+}
+
+package() {
+  cd "$srcdir/nitro-control-$pkgver"
+  install -dm755 "$pkgdir/usr/lib/nitro-control/nitro_control"
+  install -m644 application/nitro_control/*.py "$pkgdir/usr/lib/nitro-control/nitro_control/"
+  install -Dm755 bin/nitro-control "$pkgdir/usr/bin/nitro-control"
+  ln -s nitro-control "$pkgdir/usr/bin/nitro-control-supervisor"
+  ln -s nitro-control "$pkgdir/usr/bin/nitro-control-recovery"
+  install -Dm644 data/org.nitrocontrol.NitroControl.desktop \
+    "$pkgdir/usr/share/applications/org.nitrocontrol.NitroControl.desktop"
+  install -Dm644 data/org.nitrocontrol.NitroControl.svg \
+    "$pkgdir/usr/share/icons/hicolor/scalable/apps/org.nitrocontrol.NitroControl.svg"
+  install -Dm644 data/org.nitrocontrol.control.policy \
+    "$pkgdir/usr/share/polkit-1/actions/org.nitrocontrol.control.policy"
+  install -Dm644 data/nitro-control.service "$pkgdir/usr/lib/systemd/system/nitro-control.service"
+  install -Dm644 data/nitro-control-sleep.service "$pkgdir/usr/lib/systemd/system/nitro-control-sleep.service"
+  install -dm755 "$pkgdir/usr/share/doc/nitro-control"
+  install -m644 docs/ARCHITECTURE.md docs/APPLICATION-INSTALL.md docs/SUPPORTED-HARDWARE.md \
+    docs/UNINSTALL.md data/validation.conf.example "$pkgdir/usr/share/doc/nitro-control/"
+  install -dm755 "$pkgdir/usr/share/licenses/nitro-control"
+  install -m644 LICENSE NOTICE.md "$pkgdir/usr/share/licenses/nitro-control/"
+  install -dm755 "$pkgdir/usr/share/licenses/nitro-control/LICENSES"
+  install -m644 LICENSES/*.txt LICENSES/README.md LICENSES/SHA256SUMS "$pkgdir/usr/share/licenses/nitro-control/LICENSES/"
+}
