@@ -1,0 +1,6 @@
+# Attended hardware validation only. Never installed or enabled automatically.
+[Service]
+ExecStart=
+ExecStart=/usr/bin/nitro-control-supervisor --enable-control --validation-mode
+ExecStopPost=
+ExecStopPost=/usr/bin/nitro-control-recovery --auto --enable-control --validation-mode

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Nitro Control
+Comment=Independent Acer fan control with supervised firmware Auto recovery
+Exec=nitro-control
+Icon=org.nitrocontrol.NitroControl
+Terminal=false
+Categories=System;Monitor;HardwareSettings;
+Keywords=Acer;Nitro;fan;cooling;temperature;
+StartupNotify=true
+StartupWMClass=org.nitrocontrol.NitroControl

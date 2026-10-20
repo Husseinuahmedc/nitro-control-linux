@@ -1,0 +1,23 @@
+[Unit]
+Description=Verify firmware Auto before sleep and require fresh control after resume
+Before=sleep.target
+After=nitro-control.service
+ConditionPathExists=/etc/nitro-control/hardware-approved
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=root
+ExecStart=/usr/bin/nitro-control-recovery --suspend
+ExecStop=/usr/bin/nitro-control-recovery --resume
+TimeoutStartSec=20
+TimeoutStopSec=20
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/run/nitro-control
+RestrictAddressFamilies=AF_UNIX
+
+[Install]
+RequiredBy=sleep.target

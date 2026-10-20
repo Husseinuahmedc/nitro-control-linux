@@ -1,0 +1,23 @@
+#!/usr/bin/python -I
+"""Unprivileged GUI launcher and fixed installed backend entry points."""
+
+import importlib
+import os
+from pathlib import Path
+import sys
+
+
+name = Path(sys.argv[0]).name
+module = {"nitro-control": "gui", "nitro-control-supervisor": "supervisor",
+          "nitro-control-recovery": "recovery"}.get(name)
+if module is None:
+    raise SystemExit("Unknown Nitro Control entry point")
+if module == "gui" and os.geteuid() == 0:
+    raise SystemExit("Run Nitro Control as your desktop user, never as a root GUI.")
+installed = Path("/usr/lib/nitro-control")
+source = Path(__file__).resolve().parent.parent / "application"
+package = installed if os.geteuid() == 0 or not (source / "nitro_control").is_dir() else source
+if not (package / "nitro_control").is_dir():
+    raise SystemExit("Nitro Control package is unavailable; install the reviewed application package first.")
+sys.path.insert(0, str(package))
+raise SystemExit(importlib.import_module(f"nitro_control.{module}").main())

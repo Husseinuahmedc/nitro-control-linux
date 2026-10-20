@@ -1,0 +1,27 @@
+[Unit]
+Description=Nitro Control independent fan supervisor
+After=systemd-logind.service
+ConditionPathExists=/etc/nitro-control/hardware-approved
+Documentation=file:/usr/share/doc/nitro-control/APPLICATION-INSTALL.md
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/nitro-control-supervisor --enable-control
+ExecStopPost=/usr/bin/nitro-control-recovery --auto --enable-control
+Restart=no
+KillMode=control-group
+TimeoutStopSec=30
+RuntimeDirectory=nitro-control
+RuntimeDirectoryMode=0755
+RuntimeDirectoryPreserve=yes
+UMask=0022
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/run/nitro-control /sys/devices/platform/acer-wmi/hwmon
+RestrictAddressFamilies=AF_UNIX
+
+[Install]
+WantedBy=multi-user.target
+Also=nitro-control-sleep.service
